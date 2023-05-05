@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'puzzle';
+  title = 'Login';
+  outputarr = [];
+
+  toOutput(event: any) {
+    this.outputarr = event;
+    
+  }
 }
