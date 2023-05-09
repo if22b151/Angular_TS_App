@@ -1,4 +1,4 @@
 <h1>{{title}}</h1>
 <app-login (loginEvent)="toOutput($event)"></app-login>
-<strong><span class="output" *ngFor="let item of outputarr">{{item}}<br></span></strong>
+<span class="output" *ngFor="let item of outputarr">{{item}}<br></span>
 <router-outlet></router-outlet>
