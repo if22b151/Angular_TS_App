@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   //email validation
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
+  hide2 = true;
 
   constructor() { }
 
