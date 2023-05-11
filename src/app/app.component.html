@@ -1,4 +1,8 @@
-<h1>{{title}}</h1>
-<app-login (loginEvent)="toOutput($event)"></app-login>
-<span class="output" *ngFor="let item of outputarr">{{item}}<br></span>
+<mat-toolbar>
+    <a mat-raised-button type="button" color="primary" routerLink="/login">Login</a>
+    <span class="example-spacer"></span>
+    <a mat-raised-button type="button" color="primary" routerLink="/signup">Sign-In</a>
+    <span class="example-spacer"></span>
+    <a mat-raised-button type="button" color="primary" routerLink="/">Homepage</a>
+</mat-toolbar>
 <router-outlet></router-outlet>

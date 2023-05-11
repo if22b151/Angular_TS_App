@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -7,25 +7,24 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
-  @Output() loginEvent = new EventEmitter<object>();
+export class LoginComponent {
+  title = 'Login';
   //email validation
   email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   hide = true;
-  hide2 = true;
-
+  
   constructor() { }
 
-  ngOnInit(): void {
-
+  onSubmit(email: string, password: string) {
+    if(email === "test@test.at" && password === "12345678") {
+      console.log("Login successful");
+    } else {
+      console.log("Login failed");
+    }
   }
 
-  onSubmit(email: string, password: string, confirmPassword: string) {
-    const inputarr = [email, password, confirmPassword];
-    this.loginEvent.emit(inputarr);
-  }
-
-  getErrorMessage() {
+  getEmailErrorMessage() {
     //if nothing is entered
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -33,4 +32,13 @@ export class LoginComponent implements OnInit {
     //if email is invalid
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+  getPasswordErrorMessage() {
+    //if nothing is entered
+    if (this.password.hasError('required')) {
+      return 'You must enter a value';
+    }
+    //if password is too short
+    return this.password.hasError('minlength') ? 'Password must be at least 8 characters' : '';
+  }
+
 }
