@@ -35,7 +35,8 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="full-width">
         <mat-label>Enter your postalcode</mat-label>
-        <input matInput type="number" placeholder="1234" #newpostalcode>
+        <input matInput [formControl]="postal" placeholder="1234" #newpostalcode>
+        <mat-error *ngIf="postal.invalid">{{getPostalErrorMessage()}}</mat-error>
     </mat-form-field>
     <strong><span>{{ error }}</span></strong>
     <br>

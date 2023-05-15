@@ -13,6 +13,7 @@ export class SignupComponent {
   //password validation
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   passwordconfirm = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  //postal code validation
   postal = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('[0-9]*')]);
 
   hide = true;
@@ -44,6 +45,13 @@ export class SignupComponent {
     }
     //if password is invalid
     return this.password.hasError('minlength') ? 'Password must be atleast 8 characters long' : '';
+  }
+
+  getPostalErrorMessage() {
+    //if postal is invalid
+    return this.postal.hasError('minlength') ? 'Postal code must be 4 digits long' :
+           this.postal.hasError('maxlength') ? 'Postal code must be 4 digits long' :
+           this.postal.hasError('pattern') ? 'Postal code must only contain numbers' : '';
   }
 
 }
