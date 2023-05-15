@@ -13,6 +13,7 @@ export class SignupComponent {
   //password validation
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   passwordconfirm = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  postal = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('[0-9]*')]);
 
   hide = true;
   hide2 = true;
