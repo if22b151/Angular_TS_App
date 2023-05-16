@@ -22,7 +22,7 @@ export class SignupComponent {
   error = '';
 
   constructor() { }
-                                                                                                      //find out how to just enter numbers
+  
   onSubmit(email: string, password: string, confirmPassword: string, company: string, address: string, postalcode: string) {
     if(password !== confirmPassword) {
       this.error = "Passwords do not match";
