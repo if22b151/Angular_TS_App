@@ -3,10 +3,14 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors('http://localhost:4200'));
+app.use(cors({ origin:'http://localhost:4200' }));
 
 app.get('/', (req, res) => {
     res.send("Hello World");
+});
+
+app.post('/', (req, res) => {
+    res.send("Hello World from post!");
 });
 
 app.listen(3000, () => {

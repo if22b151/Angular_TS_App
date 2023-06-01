@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { LoginService } from './login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,6 @@ export class LoginComponent {
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   hide = true;
   
-  constructor() { }
-
   onSubmit(email: string, password: string) {
     if(email === "test@test.at" && password === "12345678") {
       console.log("Login successful");
