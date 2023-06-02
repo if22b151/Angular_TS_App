@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -21,12 +22,12 @@ export class SignupComponent {
 
   error = '';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
   
   onSubmit(email: string, password: string, confirmPassword: string, company: string, address: string, postalcode: string) {
     if(password !== confirmPassword) {
       this.error = "Passwords do not match";
-    }
+    } 
   }
 
   getEmailErrorMessage() {
