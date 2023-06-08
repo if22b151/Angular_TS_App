@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  title = 'Signin';
+  title = 'Signup';
   //email validation
   email = new FormControl('', [Validators.required, Validators.email]);
   //password validation
@@ -19,15 +20,34 @@ export class SignupComponent {
 
   hide = true;
   hide2 = true;
-
+  message = '';
   error = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private LoginService: LoginService) { }
   
   onSubmit(email: string, password: string, confirmPassword: string, company: string, address: string, postalcode: string) {
-    if(password !== confirmPassword) {
-      this.error = "Passwords do not match";
-    } 
+      if(password !== confirmPassword) {
+        this.error = "Passwords do not match";
+      } else {
+        const userData = {
+          email: email,
+          password: password
+        }
+
+        this.http.post<any>('http://localhost:3000/users', userData).subscribe(
+          (response) => {
+
+            this.message = response.message;
+            this.LoginService.setAuthToken(response.token);
+            
+          },
+          (error) => {
+            
+            this.message = error.error.message;
+            
+          }
+        );
+      }
   }
 
   getEmailErrorMessage() {

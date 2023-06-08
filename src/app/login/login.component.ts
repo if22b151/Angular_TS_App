@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,12 +16,28 @@ export class LoginComponent {
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   hide = true;
   
+  constructor(private http: HttpClient, private LoginService: LoginService) { }
+
   onSubmit(email: string, password: string) {
-    if(email === "test@test.at" && password === "12345678") {
-      console.log("Login successful");
-    } else {
-      console.log("Login failed");
-    }
+
+      const authToken = this.LoginService.getAuthToken();
+
+      console.log(authToken);
+
+      const userData = {
+        email: email,
+        password: password,
+        authToken: authToken
+      };
+
+      this.http.post<any>('http://localhost:3000/login', userData).subscribe(
+        (response) => {
+            console.log(response);
+        },
+        (error) => {
+            console.log(error);
+        }
+      );
   }
 
   getEmailErrorMessage() {
