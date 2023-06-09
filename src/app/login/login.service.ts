@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
   private authToken: string = '';
+  private email: string = '';
 
   constructor() { }
 
@@ -14,5 +15,13 @@ export class LoginService {
 
   getAuthToken() {
     return this.authToken;
+  }
+
+  setEmail(email: string) {
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
   }
 }

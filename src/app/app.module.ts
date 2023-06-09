@@ -43,6 +43,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { SignupComponent } from './signup/signup.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { SignupComponent } from './signup/signup.component';
     AppComponent,
     LoginComponent,
     SignupComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

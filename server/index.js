@@ -8,11 +8,6 @@ app.use(cors({ origin:'http://localhost:4200' }));
 app.use(bodyParser.json());
 
 
-
-app.get('/', (req, res) => {
-    res.send("Hello World");
-});
-
 const users = [];
 
 app.post('/users', (req, res) => {
@@ -36,18 +31,47 @@ app.post('/users', (req, res) => {
 app.post('/login', (req, res) => {
     for(let i = 0; i < users.length; i++) {
         if(users[i].email === req.body.email && users[i].password === req.body.password && users[i].authToken === req.body.authToken) {
-            return res.status(200).json({ message: "User successfully logged in!" });
+            return res.status(200).json({ message: `Welcome ${users[i].email}!` });
         } else {
             return res.status(401).json({ message: "Invalid credentials!" });
         }
     }
+
     
 });
 
 const highscores = [];
 
 app.post('/highscores', (req, res) => {
-    
+    const username = req.body.email;
+    const highscore = req.body.highscore;
+
+    const newHighscore = { username: username, highscore: highscore };
+    highscores.push(newHighscore);
+
+    console.log(highscores);
+    if(highscores.includes(newHighscore)) {
+        return res.status(200).json({ message: "Highscore successfully added!" });
+    } else {
+        return res.status(400).json({ message: "Couldn`t add highscore!" });
+    }
+})
+
+app.get('/highscores', (req, res) => {
+    if(highscores.length > 0) {
+        return res.status(200).json( {highscores: highscores} );
+    } else {
+        return res.status(400).json({ message: "Couldn`t get highscores!" });
+    }
+})
+
+app.delete('/sessions', (req, res) => {
+    users.authToken.delete();
+    if(users.authToken === null) {
+        res.status(200).json({ message: "User successfully logged out!" });
+    } else {
+        res.status(400).json({ message: "Couldn`t log out user!" });
+    }
 })
 
 function generateAuthToken() {

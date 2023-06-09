@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../login/login.service';
 
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -38,7 +39,8 @@ export class SignupComponent {
           (response) => {
 
             this.message = response.message;
-            this.LoginService.setAuthToken(response.token);
+            this.LoginService.setAuthToken(response.authToken);
+            console.log(this.LoginService.getAuthToken());
             
           },
           (error) => {
